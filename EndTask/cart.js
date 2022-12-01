@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	var productItem = [{
+	let productItem = [{
 		productName: "Nike Dunk High Retro",
 		price: "110.00",
 		photo: "product-1.jpg"
@@ -59,27 +59,27 @@ $(document).ready(function () {
 });
 
 function addToCart(element) {
-	var productParent = $(element).closest('div.product-item');
+	let productParent = $(element).closest('div.product-item');
 
-	var price = $(productParent).find('.price span').text();
-	var productName = $(productParent).find('.productname').text();
-	var quantity = $(productParent).find('.product-quantity').val();
+	let price = $(productParent).find('.price span').text();
+	let productName = $(productParent).find('.productname').text();
+	let quantity = $(productParent).find('.product-quantity').val();
 
-	var cartItem = {
+	let cartItem = {
 		productName: productName,
 		price: price,
-		quantity: quantity
+		quantity: quantity,
 	};
-	var cartItemJSON = JSON.stringify(cartItem);
+	let cartItemJSON = JSON.stringify(cartItem);
 
-	var cartArray = new Array();
+	let cartArray = new Array();
 	// If JavaScript Shopping Cart Session Is Not Empty
 	if (sessionStorage.getItem('shopping-cart')) {
 		cartArray = JSON.parse(sessionStorage.getItem('shopping-cart'));
 	}
 	cartArray.push(cartItemJSON);
 
-	var cartJSON = JSON.stringify(cartArray);
+	let cartJSON = JSON.stringify(cartArray);
 	sessionStorage.setItem('shopping-cart', cartJSON);
 	showCartTable();
 }
@@ -96,28 +96,28 @@ function emptyCart() {
 
 function removeCartItem(index) {
 	if (sessionStorage.getItem('shopping-cart')) {
-		var shoppingCart = JSON.parse(sessionStorage.getItem('shopping-cart'));
+		let shoppingCart = JSON.parse(sessionStorage.getItem('shopping-cart'));
 		sessionStorage.removeItem(shoppingCart[index]);
 		showCartTable();
 	}
 }
 
 function showCartTable() {
-	var cartRowHTML = "";
-	var itemCount = 0;
-	var grandTotal = 0;
+	let cartRowHTML = "";
+	let itemCount = 0;
+	let grandTotal = 0;
 
-	var price = 0;
-	var quantity = 0;
-	var subTotal = 0;
+	let price = 0;
+	let quantity = 0;
+	let subTotal = 0;
 
 	if (sessionStorage.getItem('shopping-cart')) {
-		var shoppingCart = JSON.parse(sessionStorage.getItem('shopping-cart'));
+		let shoppingCart = JSON.parse(sessionStorage.getItem('shopping-cart'));
 		itemCount = shoppingCart.length;
 
 		//Iterate Javascript Shopping Cart Array
 		shoppingCart.forEach(function (item) {
-			var cartItem = JSON.parse(item);
+			let cartItem = JSON.parse(item);
 			price = parseFloat(cartItem.price);
 			quantity = parseInt(cartItem.quantity);
 			subTotal = price * quantity
@@ -141,7 +141,7 @@ function showCartTable() {
 
 function showProductGallery(product) {
 	//Iterate Javascript Shopping Cart Array
-	var productHTML = "";
+	let productHTML = "";
 	product.forEach(function (item) {
 		productHTML += '<div class="product-item">' +
 			'<img src="product-images/' + item.photo + '">' +
